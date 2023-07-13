@@ -76,8 +76,16 @@ namespace KCureVDIDataBox
         /// <returns></returns>
         public static string GetDefaultFullPath()
         {
+            // gony
+            //var drives = GetDrives();
+            //string drive = drives.First().Name.TrimEnd('\\');
+
             var drives = GetDrives();
-            string drive = drives.First().Name.TrimEnd('\\');
+            string drive = "";
+            if (drives.Count == 1)
+                drive = drives.First().Name.TrimEnd('\\');
+            else
+                drive = "D://";
 
             string dir = ReplaceVar(GetAppSetting(ConfigAppKeys.DefaultDirectoryClient, ""));
 

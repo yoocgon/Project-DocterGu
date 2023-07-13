@@ -162,15 +162,6 @@ namespace KCureVDIDataBox
                                     )
                                     .ToList();
             //
-            //List<string> cryOutFiles = files
-            //            .Select(f => CCommon.LoginResult
-            //                            .GetUrlDirectory(
-            //                                UrlDirectoryTypes.Raw,
-            //                                CPath.GetRemotePath(remoteDir, di.FullName, Path.Combine(di.FullName, f.Name))
-            //                            )
-            //            )
-            //            .ToList();
-            //
             (bool success, string errorMsg, AplyResponse response) = await CCommon.Api.Aply(dataAplyNo, CCommon.LoginId, cryOutFiles);
             Log("dataAplyNo", dataAplyNo);
             Log("CCommon.LoginId", CCommon.LoginId);

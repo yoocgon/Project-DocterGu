@@ -63,6 +63,16 @@ namespace KCureVDIDataBox
 
                 string jsonResponse = await response.Content.ReadAsStringAsync();
 
+                //    ""nasUrl"": ""198.18.229.52"",
+                //    ""nasId"": ""centos"",
+                //    ""nasPw"": """",
+                //    ""nasPort"": ""22"",
+
+                //    ""nasUrl"": ""198.18.229.52"",
+                //    ""nasId"": ""ftpuser"",
+                //    ""nasPw"": ""1234"",
+                //    ""nasPort"": ""21"",
+
                 // gony, QA
                 string jsonResponseTemp = @"{
                   ""httpStatus"": 200,
@@ -1856,7 +1866,7 @@ namespace KCureVDIDataBox
                               ""dtuEdt"": ""20240615"",
                               ""cryOutApply"": ""Y"",
                               ""prtiFile"": ""/K-CURE/apc/dsb/KC20230710007"",
-                              ""carryFile"": ""/K-CURE/apc/dsb/KC20230710007"",
+                              ""carryFile"": ""/K-CURE/brn/KC20230710007"",
                               ""modified"": ""Y""
                             }
                           ],
@@ -4618,7 +4628,7 @@ namespace KCureVDIDataBox
                 //";
 
                 jsonResponse = jsonResponseTemp;
-                Log("jsonResponse", PrettifyJSON(jsonResponse));
+                Log("jsonResponse", BeautifyJSON(jsonResponse));
 
                 JsonDocument doc = JsonDocument.Parse(jsonResponse);
 
@@ -4665,7 +4675,7 @@ namespace KCureVDIDataBox
 
             var request = new LoginRequest(id, password);
             string jsonContent = JsonSerializer.Serialize(request);
-            Log("jsonContent", PrettifyJSON(jsonContent));
+            Log("jsonContent", BeautifyJSON(jsonContent));
 
             (bool success, string msg, LoginResponse response) = await Send<LoginResponse>(url, jsonContent);
             if (!success)
@@ -4696,7 +4706,7 @@ namespace KCureVDIDataBox
 
             var request = new AplyRequest(dataAplyNo, userId, cryOutFiles);
             string jsonContent = JsonSerializer.Serialize(request);
-            Log("jsonContent", PrettifyJSON(jsonContent));
+            Log("jsonContent", BeautifyJSON(jsonContent));
 
             (bool success, string msg, AplyResponse response) = await Send<AplyResponse>(url, jsonContent);
             if (!success)
@@ -4704,10 +4714,10 @@ namespace KCureVDIDataBox
                 return (false, msg, new AplyResponse());
             }
 
-            if (!response.result.isApply)
-            {
-                return (false, response.result.applyFailMsg, new AplyResponse());
-            }
+            //if (!response.result.isApply)
+            //{
+            //    return (false, response.result.applyFailMsg, new AplyResponse());
+            //}
 
             return (true, "", response);
         }
@@ -4717,7 +4727,7 @@ namespace KCureVDIDataBox
             Console.WriteLine($"\nDEBUG>>> ({category}) \n{log}");
         }
 
-        public string PrettifyJSON(string json)
+        public string BeautifyJSON(string json)
         {
             string beautifiedJson = Newtonsoft.Json.JsonConvert.SerializeObject(
             Newtonsoft.Json.JsonConvert.DeserializeObject(json),
