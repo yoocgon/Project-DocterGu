@@ -346,6 +346,7 @@
             lvwClient.ContextMenuStrip = mnuPopup;
             lvwClient.Dock = DockStyle.Fill;
             lvwClient.FullRowSelect = true;
+            lvwClient.LargeImageList = imageList1;
             lvwClient.Location = new Point(0, 0);
             lvwClient.Margin = new Padding(3, 4, 3, 4);
             lvwClient.Name = "lvwClient";
@@ -752,6 +753,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1665, 857);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(statusStrip);
